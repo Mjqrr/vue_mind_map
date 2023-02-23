@@ -6,40 +6,17 @@
 
     <div class="search-container">
       <div class="inputBox">
-        <input
-          type="text"
-          placeholder="输入文件名称"
-          v-model="keywords"
-          @keydown.enter="getData($event)"
-          @keyup="search"
-          @blur="hiddenData"
-        />
+        <input type="text" placeholder="输入文件名称" v-model="keywords" @keydown.enter="getData($event)" @keyup="search"
+          @blur="hiddenData" />
         <div class="search"></div>
       </div>
-
-      <span id="btn"
-        ><el-button
-          type="success"
-          icon="el-icon-upload"
-          circle
-          @click="gotolink"
-        ></el-button
-      ></span>
-
+      <!-- <span id="btn"><el-button type="success" icon="el-icon-upload" circle @click="gotolink"></el-button></span> -->
       <el-dialog title="上传本地文件" :visible.sync="dialogFormVisible">
         <el-form ref="form" :model="form" :rules="rules" label-width="80px">
           <el-form-item label="请选择文件" label-width="100px">
-            <el-upload
-              class="upload-demo"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              :before-remove="beforeRemove"
-              multiple
-              :limit="3"
-              :on-exceed="handleExceed"
-              :file-list="fileList2"
-            >
+            <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/"
+              :on-preview="handlePreview" :on-remove="handleRemove" :before-remove="beforeRemove" multiple :limit="3"
+              :on-exceed="handleExceed" :file-list="fileList2">
               <el-button size="small" type="primary">点击上传</el-button>
               <!-- <div slot="tip" class="el-upload__tip"><h3>只能上传jpg/png文件,且不超过500kb</h3></div> -->
             </el-upload>
@@ -47,44 +24,41 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false"
-            >确 定</el-button
-          >
+          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
         </div>
       </el-dialog>
     </div>
 
     <div>
-      <span id="ss"
-        >搜索记录:
-        <span
-          class="search-history"
-          v-for="(item, index) in searchHistory"
-          @click="ressetSearch(item)"
-        >
+      <span id="ss">搜索记录:
+        <span class="search-history" v-for="(item, index) in searchHistory" @click="ressetSearch(item)">
           {{ item }} &nbsp;
         </span>
       </span>
     </div>
 
     <div class="file-list">
-      <div
-        class="file-list-item"
-        v-for="fileListItem in fileList"
-        :key="fileListItem.id"
-        @click="openfile"
-      >
+      <div class="file-list-item" v-for="fileListItem in fileList" :key="fileListItem.id">
         <div class="file-img-container">
-          <img :src="fileListItem.imgsrc" alt="" />
-        </div>
-        <div class="file-name">
-          <span>
-            <i class="el-icon-share"></i>
-            <label>{{ fileListItem.themename }}</label>
-          </span>
+          <el-card :body-style="{ padding: '0px' }">
+            <img :src="fileListItem.imgsrc" @click="openfile" class="image" alt="" />
+            <div style="display:flex;justify-content:space-between ;padding: 14px;">
+              <span><i class="el-icon-share"></i>
+                <label>{{ fileListItem.themename }}</label></span>
+              <el-popover placement="right" width="160" trigger="click">
+                <div style="display:flex;justify-content:space-between ; margin: 0">
+                  <el-button icon="el-icon-edit" size="medium" circle @click=""></el-button>
+                  <el-button icon="el-icon-delete" size="medium" circle @click=""></el-button>
+                  <el-button icon="el-icon-upload" size="medium" circle @click="gotolink"></el-button>
+                </div>
+                <el-button slot="reference" icon="el-icon-more" size="small" circle></el-button>
+              </el-popover>
+            </div>
+          </el-card>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -173,6 +147,7 @@ export default {
       searchHistory: [], //搜索记录
 
       dialogFormVisible: false,
+      visible: false,
 
       fileList2: [
         {
@@ -204,8 +179,7 @@ export default {
     },
     handleExceed(files, fileList) {
       this.$message.warning(
-        `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
-          files.length + fileList.length
+        `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length
         } 个文件`
       );
     },
@@ -246,18 +220,19 @@ export default {
     },
     // 当他失去焦点的时候，会隐藏实时的列表
     hiddenData() {
-      
+
     },
     // kw就是传过来的值item，意思就是点击历史记录的词，会重新返回到input输入框
     ressetSearch(kw) {
       this.keywords = kw;
-      
+
       // 小bug，返回input框后应该再进行一次查询
       this.search();
     },
     goback() {
       this.$router.replace("/files");
     },
+
   },
 };
 </script>
@@ -282,7 +257,7 @@ export default {
 
 .file-list {
   margin-top: 20px;
-  text-align: left;
+  text-align: center;
   vertical-align: top;
 }
 
@@ -291,20 +266,17 @@ export default {
   cursor: pointer;
   display: inline-block;
   position: relative;
-  margin-right: 39px;
+  margin-right: 35px;
   margin-bottom: 15px;
 }
 
-.file-name {
-  text-align: center;
-}
-
+//搜索框
 .inputBox {
   width: 40px;
   height: 40px;
   position: absolute;
-  top: 15.5%;
-  left: 92%;
+  top: 10.8%;
+  left: 96%;
 }
 
 .inputBox .search {
@@ -389,19 +361,19 @@ export default {
   cursor: text;
 }
 
-.inputBox input:focus ~ .search {
+.inputBox input:focus~.search {
   right: 0px;
   background: #f60;
   z-index: 6;
 }
 
-.inputBox input:focus ~ .search::before {
+.inputBox input:focus~.search::before {
   top: 0;
   left: 0;
   width: 25px;
 }
 
-.inputBox input:focus ~ .search::after {
+.inputBox input:focus~.search::after {
   top: 0;
   left: 0;
   width: 25px;
@@ -415,5 +387,16 @@ export default {
 .inputBox input::placeholder {
   color: #777;
   opacity: 0.8;
+}
+
+//卡片
+.button {
+  padding: 0;
+  float: right;
+}
+
+.image {
+  width: 100%;
+  display: block;
 }
 </style>

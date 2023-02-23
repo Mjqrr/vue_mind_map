@@ -1,12 +1,8 @@
 <template>
-  <el-container class="home-container">    
+  <el-container class="home-container">
     <!-- 头部区域 -->
     <el-header>
-      <img
-        src="../assets/logo_small.svg"
-        style="cursor: pointer"
-        @click="backhome"
-      />
+      <img src="../assets/logo_small.svg" style="cursor: pointer" @click="backhome" />
     </el-header>
     <!-- 页面主体区域 -->
     <el-container>
@@ -17,11 +13,8 @@
             <!-- 新增按钮 -->
             <el-button type="primary" class="new" @click="createFile">新建</el-button>
             <!-- 选项菜单 -->
-            <el-menu default-active="$route.path" 
-            class="el-menu-vertical-demo" :router="true" 
-            background-color= rgb(245,217,217)
-            text-color="#606266" 
-            active-text-color="#000000">
+            <el-menu default-active="$route.path" class="el-menu-vertical-demo" :router="true"
+              background-color=rgb(245,217,217) text-color="#606266" active-text-color="#000000">
               <!-- 一级目录 -->
               <el-menu-item index="/files">
                 <i class="el-icon-house"></i>
@@ -37,15 +30,15 @@
                 <i class="el-icon-user"></i>
                 <span slot="title">用户中心</span>
               </el-menu-item>
-              <!-- 一、二级目录 -->
+              <!-- 一、二级目录
               <el-submenu index="7">
                 <template slot="title">
-                 <i class="el-icon-more"></i>
-                 <span>其他</span>
+                  <i class="el-icon-more"></i>
+                  <span>其他</span>
                 </template>
-                <el-menu-item index="/upload"><i class="el-icon-upload"></i>上传</el-menu-item>
+                <el-menu-item index="@click"><el-button icon="el-icon-upload" @click="gotolink">上传</el-button></el-menu-item>
                 <el-menu-item index="7-2"><i class="el-icon-upload2"></i>导出</el-menu-item>
-              </el-submenu>
+              </el-submenu> -->
             </el-menu>
           </el-col>
         </el-row>
@@ -63,9 +56,11 @@
 import router from "@/router";
 export default {
   data() {
-    return {};
+    return {
+      dialogFormVisible: false,
+    };
   },
-  created() {},
+  created() { },
   methods: {
     // 返回起始页面
     backhome() {
@@ -82,12 +77,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
 .home-container {
   height: 100%;
 }
 
-.el-header{
+.el-header {
   background-color: rgb(241, 187, 192);
   // background-image: url("D:\xmind\vue_mind_map\src\assets\background.jpg");
   height: 50px;
@@ -98,17 +92,19 @@ export default {
   border-bottom-style: double;
   border-width: 2px;
   border-color: rgb(241, 187, 192);
-  > img {
+
+  >img {
     width: 120px;
     height: 34.362px;
   }
-  > span {
+
+  >span {
     margin-right: 150px;
   }
 }
 
 .el-aside {
-  background-color:rgb(245,217,217);
+  background-color: rgb(245, 217, 217);
   // background-image: url("D:\xmind\vue_mind_map\src\assets\background.jpg");
   // color: rgb(199, 32, 32);
   text-align: center;
@@ -135,7 +131,7 @@ export default {
 
 .el-menu {
   width: 100%;
-  background-color: rgb(245,217,217);
+  background-color: rgb(245, 217, 217);
   // background-image: url("D:\xmind\vue_mind_map\src\assets\background.jpg");
   text-align: left;
   border-right-width: 0;
