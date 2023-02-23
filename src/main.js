@@ -4,9 +4,16 @@ import router from './router'
 import './plugins/element.js'
 // 导入全局样式表
 import './assets/css/global.css'
+<<<<<<< Updated upstream
 // 导入思维导图插件
 import ZmTreeOrg from 'zm-tree-org';
 import "zm-tree-org/lib/zm-tree-org.css";
+=======
+import Vue2OrgTree from 'vue2-org-tree'
+import 'vue2-org-tree/dist/style.css'
+
+Vue.use(Vue2OrgTree);
+>>>>>>> Stashed changes
 
 import axios from 'axios'
 // 配置请求的根路径

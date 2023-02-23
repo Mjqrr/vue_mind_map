@@ -1,4 +1,8 @@
 import Vue from 'vue';
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 import {
   Pagination,
   Dialog,

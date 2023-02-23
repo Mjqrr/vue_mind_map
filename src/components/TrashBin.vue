@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h3>回收站</h3>
+    
+    <span id="dir">
+      <el-button type="danger" icon="el-icon-delete" circle></el-button>
+      回收站
+    </span>
   </div>
 </template>
 
@@ -14,4 +18,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#dir {
+  text-align: center;
+  display: block;
+  font-size: 28px;
+}
 </style>
