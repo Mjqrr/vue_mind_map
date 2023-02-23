@@ -27,6 +27,7 @@
           <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
         </div>
       </el-dialog>
+
     </div>
 
     <div>
@@ -48,7 +49,7 @@
               <el-popover placement="right" width="160" trigger="click">
                 <div style="display:flex;justify-content:space-between ; margin: 0">
                   <el-button icon="el-icon-edit" size="medium" circle @click=""></el-button>
-                  <el-button icon="el-icon-delete" size="medium" circle @click=""></el-button>
+                  <el-button icon="el-icon-delete" size="medium" circle @click="gotolink"></el-button>
                   <el-button icon="el-icon-upload" size="medium" circle @click="gotolink"></el-button>
                 </div>
                 <el-button slot="reference" icon="el-icon-more" size="small" circle></el-button>
@@ -192,8 +193,8 @@ export default {
     openfile() {
       this.$router.push("/mindmap");
     },
+    
     gotolink() {
-      // this.$router.replace('/upload');
       this.dialogFormVisible = true;
     },
     search() {
